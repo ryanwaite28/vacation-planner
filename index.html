@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<title>Vacation Planner</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="stylesheet" type="text/css" href="http://ryanwaite28.github.io/my-cdn/css/bootstrap.css"/>
+		<link rel="stylesheet" type="text/css" href="http://ryanwaite28.github.io/my-cdn/css/emerald.css"/>
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<link rel="stylesheet" type="text/css" media="only screen and (max-width: 785px)" href="mobile-style.css">
+		<link rel="icon" type="image/jpg" href="img/emoji-3.jpg" size="20x20"/>
+		<script src="http://ryanwaite28.github.io/my-cdn/js/angular.js"></script>
+		<script src="http://ryanwaite28.github.io/my-cdn/js/jquery.js"></script>
+		<script src="http://ryanwaite28.github.io/my-cdn/js/emerald.js"></script>
+		<script src="script.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSHPWjouiZzdAI_EhWkuuLsFMEGTgyYWE&libraries=places&callback=initMap" async defer></script>
+	</head>
+
+	<body ng-app="myApp" ng-controller="masterCtrl">
+
+		<div id="s-container">
+			<img class="middlr transition" id="s-img" src="{{currentIcon}}"/>
+		</div>
+
+		<div class="top-bar">
+			<div class="banner-pane">
+				<h1 class="banner-text"><strong>Vacation<br>Planner</strong></h1>
+			</div>
+
+			<div class="navigate">
+				<h1 class="nav-text"><strong>Plan Your Trip!</strong></h1>
+
+				<!--<input class="transition" id="vaca-place" type="text" placeholder="Search a Vacation Place!"/><br>-->
+				<input class="transition" id="your-place" type="text" placeholder="Input Your Location! City, State"/><br>
+				<input class="transition" id="submit-btn" type="button" value="Submit" ng-click="loadYourMarker()"/><br>
+				<p class="text-center" id="msg1"><strong>{{msgOne}}</strong></p>
+
+				<div id="tdl" style="display: flex;">
+					<div class="planner-text transition">
+						<h3 id="pnr-text" class="text-center"><strong>Planner</strong></h3>
+					</div>
+					<div class="information-text transition">
+						<h3 id="info-text" class="text-center"><strong>Information</strong></h3>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="grand-container">
+
+			<div id="planner-div" class="container-fluid">
+
+				<div class="row">
+
+					<div class="col-md-4">
+
+						<h1 class="text-center"><strong>Calculate<br>Cost</strong></h1>
+						<select class="middlr" id="crt-pls">
+							<option>-Select a Vacation Place-</option>
+							<option ng-repeat="vaca in currentVacaPlaces" id="{{key}}">
+								<p>{{vaca.place}}</p>
+							</option>
+						</select>
+						<p class="text-center"><strong>{{msgTwo}}</strong></p>
+						<hr>
+
+						<div class="col-sm-6">
+							<p class="text-center"><strong>Your Remaining Money:</strong><br>{{yourMoney | currency}}</p>
+							<input id="remains-ipt" class="" type="" placeholder="Your Total Available">
+						</div>
+
+						<div class="col-sm-6">
+
+							<p class="text-center">Round-Trip Plane Ticket:</p>
+							<input id="apt-ipt" class="" type="" placeholder="Number of Tickets">
+							<br><br>
+
+							<p class="text-center">Hotel Cost:</p>
+							<input id="ht-ipt" class="" type="" placeholder="Number of Days In Hotel">
+							<br><br>
+
+							<p class="text-center">Rental Car Cost:</p>
+							<input id="rc-ipt" class="" type="" placeholder="Number of Days Renting Car">
+							<br><br>
+
+							<p class="text-center">Spending Money:</p>
+							<input id="spending-ipt" class="" type="" placeholder="Your Spending Money">
+							<br><br>
+						</div>
+
+						<input class="middlr" type="button" value="Calculate Costs" ng-click="calculateCosts()"/>
+
+					</div>
+
+					<div class="col-md-8">
+
+						<div>
+
+							<h1 class="text-center">Map</h1>
+							<div id="map-div">
+
+							</div>
+							<hr>
+
+							<h1 class="text-center">Image</h1>
+							<img class="middlr" id="vaca-img" alt="Vacation Image" src="{{currentImg}}"/>
+							<br.
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div id="information-div" class="container-fluid">
+
+				<div class="row">
+
+					<div class="col-md-">
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</body>
+
+</html>
