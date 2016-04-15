@@ -280,7 +280,7 @@ App.controller('masterCtrl', function($scope) {
 
     var yourTotal = $('#remains-ipt').val();
 
-    if( yourTotal == '' || yourTotal <= 0 ) {
+    if( yourTotal == '' || yourTotal <= 0 || isNaN(yourTotal) ) {
       $scope.msgTwo = 'Input Amount Into All Fields.';
       setTimeout( function() {
         $scope.msgTwo = '';
@@ -319,7 +319,7 @@ App.controller('masterCtrl', function($scope) {
       } , 3000 )
       return null;
     }
-    if( spendingMoney == '' || spendingMoney <= 0 ) {
+    if( spendingMoney == '' || spendingMoney <= 0 || isNaN(spendingMoney) ) {
       $scope.msgTwo = 'Input Amount Into All Fields.';
       setTimeout( function() {
         $scope.msgTwo = '';
@@ -330,6 +330,9 @@ App.controller('masterCtrl', function($scope) {
 
     console.log('Calculating...');
 
+    $scope.currentSpending = spendingMoney;
+    $scope.yourMoney = yourTotal;
+
     var planeCost = planeTicket * $scope.currentVaca.planeCost;
     var hotelCost = hotel * $scope.currentVaca.hotelPrice;
     var rentalCarCost = rentalCar * $scope.currentVaca.RentalCarPrice;
@@ -337,10 +340,21 @@ App.controller('masterCtrl', function($scope) {
     var vacaTotal = planeCost + hotelCost + rentalCarCost;
     console.log(vacaTotal);
 
-    $scope.yourMoney = yourTotal - vacaTotal;
-    //$scope.$apply(function(){});
+
+    $scope.msg1 = 'Your Total Money Available = ' + $scope.yourMoney;
+    $scope.msg2 = 'Plane Tickets(' + planeTicket + ')'  + ' * ' +  $scope.currentVaca.planeCost  + ' = ' + planeCost;
+    $scope.msg3 = 'Hotel Nights(' + hotel + ')'  + ' * ' +  $scope.currentVaca.hotelPrice  + ' = ' + hotelCost;
+    $scope.msg4 = 'Day Renting car(' + rentalCar + ')'  + ' * ' +  $scope.currentVaca.RentalCarPrice  + ' = ' + rentalCarCost;
+    $scope.msg5 = 'Your Specified Spending Money: ' + spendingMoney;
+    $scope.msg6 = 'Your Total - Vacation Total(' + vacaTotal + ') = ';
+
+    $scope.remaining = yourTotal - vacaTotal + ' Remaining';
 
     $('#remains-ipt').val('');
+    $('#apt-ipt').val('');
+    $('#ht-ipt').val('');
+    $('#rc-ipt').val('');
+    $('#spending-ipt').val('');
 
   }
 
@@ -360,6 +374,10 @@ App.controller('masterCtrl', function($scope) {
     var choice = $scope.currentVacaPlaces[index];
     $scope.currentVaca = $scope.currentVacaPlaces[index];
     $scope.currentImg = $scope.currentVacaPlaces[index].img;
+
+    $scope.currentPlane = $scope.currentVacaPlaces[index].planeCost;
+    $scope.currentHotel = $scope.currentVacaPlaces[index].hotelPrice;
+    $scope.currentCar = $scope.currentVacaPlaces[index].RentalCarPrice;
 
     $scope.loadVacaPlace(choice);
 

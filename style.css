@@ -58,6 +58,11 @@ hr {
   font-weight: bold;
   font-size: 80px;
   text-shadow: 3px 5px 9px grey;
+  color: black;
+  opacity: 0.7;
+}
+.banner-text:hover {
+  opacity: 1.0;
 }
 
 .navigate {
@@ -78,8 +83,8 @@ hr {
   width: 75%;
   text-align: center;
 }
-#vaca-place:hover, #your-place:hover, #submit-btn:hover {
-  padding: 10px;
+#vaca-place:hover, #your-place:hover, #submit-btn:hover, #ipt-1:hover {
+  padding: 15px;
 }
 
 .nav-text {
@@ -138,6 +143,14 @@ hr {
 }
 
 .col-sm-6 input {
+  display: block;
+  margin: auto;
+  border-radius: 3px;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+#ipt-1 {
   display: block;
   margin: auto;
   border-radius: 3px;

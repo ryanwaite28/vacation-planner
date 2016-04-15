@@ -27,7 +27,7 @@
 
 		<div class="top-bar">
 			<div class="banner-pane">
-				<h1 class="banner-text"><strong>Vacation<br>Planner</strong></h1>
+				<h1 class="transition banner-text"><strong>Vacation<br>Planner</strong></h1>
 			</div>
 
 			<div class="navigate">
@@ -68,30 +68,41 @@
 						<hr>
 
 						<div class="col-sm-6">
-							<p class="text-center"><strong>Your Remaining Money:</strong><br>{{yourMoney | currency}}</p>
+							<p class="text-center"><strong>Your Money:</strong><br>{{yourMoney | currency}}</p>
 							<input id="remains-ipt" class="" type="" placeholder="Your Total Available">
-						</div>
+							<br><br>
 
-						<div class="col-sm-6">
-
-							<p class="text-center">Round-Trip Plane Ticket:</p>
+							<p class="text-center"><strong>Round-Trip Plane Ticket:</strong><br>{{currentPlane | currency}} per person.</p>
 							<input id="apt-ipt" class="" type="" placeholder="Number of Tickets">
 							<br><br>
 
-							<p class="text-center">Hotel Cost:</p>
-							<input id="ht-ipt" class="" type="" placeholder="Number of Days In Hotel">
+							<p class="text-center"><strong>Hotel Cost:</strong><br>{{currentHotel | currency}} per day.</p>
+							<input id="ht-ipt" class="" type="" placeholder="Number of Days ">
 							<br><br>
 
-							<p class="text-center">Rental Car Cost:</p>
-							<input id="rc-ipt" class="" type="" placeholder="Number of Days Renting Car">
+							<p class="text-center"><strong>Rental Car Cost:</strong><br>{{currentCar | currency}} per day.</p>
+							<input id="rc-ipt" class="" type="" placeholder="Number of Days">
 							<br><br>
 
-							<p class="text-center">Spending Money:</p>
+							<p class="text-center"><strong>Spending Money:</strong><br>{{currentSpending | currency}}</p>
 							<input id="spending-ipt" class="" type="" placeholder="Your Spending Money">
 							<br><br>
 						</div>
 
-						<input class="middlr" type="button" value="Calculate Costs" ng-click="calculateCosts()"/>
+						<div class="col-sm-6">
+
+							<p id="msg1">{{msg1}}</p><br>
+							<p id="msg2">{{msg2}}</p><br>
+							<p id="msg3">{{msg3}}</p><br>
+							<p id="msg4">{{msg4}}</p><br>
+							<p id="msg5">{{msg5}}</p><br>
+							<p id="msg6">{{msg6}}<br>{{remaining | currency}}</p>
+
+						</div>
+
+						<div class="col-sm-12">
+							<input id="ipt-1" class="middlr transition" type="button" value="Calculate Costs" ng-click="calculateCosts()"/>
+						</div>
 
 					</div>
 
@@ -107,7 +118,7 @@
 
 							<h1 class="text-center">Image</h1>
 							<img class="middlr" id="vaca-img" alt="Vacation Image" src="{{currentImg}}"/>
-							<br.
+							<br>
 
 						</div>
 
