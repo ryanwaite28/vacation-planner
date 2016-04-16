@@ -48,7 +48,7 @@ hr {
   background-repeat: no-repeat;
   background-position: center center;
   width: 100%;
-  height: calc(95vh - 60px);
+  height: 100vh;
 }
 
 .banner-text {
@@ -68,7 +68,6 @@ hr {
 .navigate {
   width: 100%;
   border-top: 1px solid black;
-  border-bottom: 1px solid black;
 }
 
 .navigate input {
@@ -77,6 +76,7 @@ hr {
   border-radius: 3px;
   border: 1px solid black;
   padding: 5px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
 #vaca-place, #your-place {
@@ -94,12 +94,28 @@ hr {
 }
 
 #tdl {
+  border-top: 1px solid black;
   width: 100%;
   z-index: 1000;
+  display: block;
+  height: 60px;
+}
+
+.l1 , .l2 {
+  z-index: 1000;
+  border-bottom: 1px solid black;
+}
+
+.l1 {
+  left: 0px;
+}
+.l2 {
+  right: 0px;
 }
 
 .planner-text, .information-text {
   height: 60px;
+  float: left;
 }
 .planner-text {
   width: 50%;
@@ -121,12 +137,13 @@ hr {
 
 /* --- */
 
-#grand-container {
+#planner-div {
 
 }
 
-#grand-container::-webkit-scrollbar {
-
+#information-div {
+  position: absolute;
+  left: -9999px;
 }
 
 #map-div {
@@ -140,14 +157,18 @@ hr {
   width: 100%;
   padding: 3px;
   background-color: black;
+  max-height: 85vh;
 }
 
-.col-sm-6 input {
+.col-md-6 input {
   display: block;
   margin: auto;
   border-radius: 3px;
   border: 1px solid black;
   padding: 5px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  width: 85%;
+  min-width: 60%;
 }
 
 #ipt-1 {
@@ -155,5 +176,18 @@ hr {
   margin: auto;
   border-radius: 3px;
   border: 1px solid black;
+  padding: 5px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+#news-items {
+  padding: 10px;
+  border: 1px solid black;
+  display: block;
+}
+
+#news-items li {
+  display: block;
+  list-style: none;
   padding: 5px;
 }

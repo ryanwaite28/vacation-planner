@@ -12,7 +12,7 @@ function initMap() {
   // Create a map object and specify the DOM element for display.
   map = new google.maps.Map(document.getElementById('map-div'), {
     center: {lat: 39.173303, lng: -77.177274},
-    scrollwheel: true,
+    scrollwheel: false,
     zoom: 5
   });
 
@@ -172,7 +172,7 @@ App.controller('masterCtrl', function($scope) {
       '<h2 class="text-center">Your Location</h2>' +
       '<h4 class="text-center">' + yourLocation +  '</h4>' +
       '<hr>' +
-      '<img class="middlr" src="' + imgURL + '"' +
+      '<img style="border: 1px solid black;" class="middlr" src="' + imgURL + '"' +
       '<br>' +
       '</div>';
 
@@ -225,7 +225,7 @@ App.controller('masterCtrl', function($scope) {
     '<h2 class="text-center">Vacation Place</h2>' +
     '<h4 class="text-center">' + choice.place +  '</h4>' +
     '<hr>' +
-    '<img id="s-img" class="middlr" src="' + choice.img + '"' +
+    '<img style="border: 1px solid black;" width="150" height="150" class="middlr" src="' + choice.img + '"' +
     '<br>' +
     '</div>';
 
@@ -348,13 +348,67 @@ App.controller('masterCtrl', function($scope) {
     $scope.msg5 = 'Your Specified Spending Money: ' + spendingMoney;
     $scope.msg6 = 'Your Total - Vacation Total(' + vacaTotal + ') = ';
 
-    $scope.remaining = yourTotal - vacaTotal + ' Remaining';
+    $scope.remaining = yourTotal - vacaTotal;
 
     $('#remains-ipt').val('');
     $('#apt-ipt').val('');
     $('#ht-ipt').val('');
     $('#rc-ipt').val('');
     $('#spending-ipt').val('');
+
+  }
+
+  $scope.loadInfo = function() {
+
+    if( $scope.currentVaca == '' || $scope.currentVaca == undefined ) {
+      $scope.msgTwo = 'Please Select a Vacation Place.';
+      setTimeout( function() {
+        $scope.msgTwo = '';
+        $scope.$apply(function(){});
+      } , 3000 )
+      return;
+    }
+
+    $scope.articles = [];
+
+    var nytURL = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + $scope.currentVaca.place + '&sort=newest&api-key=14132d207c54f0e27f34c90f3e5e4e59:9:73463344'
+
+					$.getJSON(nytURL, function(data) {
+						console.log(data);
+
+						articles = data.response.docs;
+
+						for (var i = 0; i < articles.length; i++) {
+							var article = articles[i];
+
+							var HLK = article.headline.content_kicker;
+							var HLM = article.headline.main;
+							var HLP = article.headline.print_headline;
+							var LP = article.lead_paragraph;
+							if(article.byline == null){
+								continue;
+							}
+							var BL = article.byline.original;
+							var PD = article.pub_date;
+							var WL = article.web_url;
+
+							$scope.articles.push({
+								headLineKicker: HLK,
+								headLineMain: HLM,
+								headLinePrint: HLP,
+								leadParagraph: LP,
+								byLine: BL,
+								pubDate: PD,
+								webLink: WL,
+							});
+
+						}
+
+						$scope.$apply(function () {
+							console.log($scope.articles);
+						});
+
+					})
 
   }
 
@@ -368,8 +422,22 @@ App.controller('masterCtrl', function($scope) {
 		index = index - 1;
 
     if( index == -1 ) {
+      /*$('.l1').hide('fast');
+      $('.l2').hide('fast');
+      $('#planner-div').css({
+        'position' : 'absolute',
+        'left' : '-9999px'
+      })*/
       return;
     }
+
+    /*$('.l1').show('fast');
+    $('.l2').show('fast');
+
+    $('#planner-div').css({
+      'position' : 'static',
+      'left' : '0px'
+    })*/
 
     var choice = $scope.currentVacaPlaces[index];
     $scope.currentVaca = $scope.currentVacaPlaces[index];
@@ -386,18 +454,34 @@ App.controller('masterCtrl', function($scope) {
   $(document).ready(function() {
 
   	var tdl = $('#tdl');
+    var l1 = $('.l1');
+    var l2 = $('.l2');
+    var grandContainer = $('#grand-container');
+
+    var t;
 
   	$(window).scroll(function(e) {
 
   		var wHeight = $(window).scrollTop();
+      var k = tdl.position();
+      //console.log(k);
+      var wHeight2 = k.top;
   		//console.log(wHeight);
+      //console.log(wHeight2);
 
-  		if( wHeight >= 1135 ) {
-  			//tdl.css('position', 'fixed');
-  			//tdl.css('top', '0px');
+  		if( wHeight >= wHeight2 ) {
+  			l1.css('position' , 'fixed');
+  			l1.css('top' , '0px');
+        l2.css('position' , 'fixed');
+  			l2.css('top' , '0px');
+        //grandContainer.css('padding-top' , '60px');
   		}
   		else {
-  			//tdl.css('position', 'static');
+  			l1.css('position', 'relative');
+        l1.css('top' , '');
+        l2.css('position', 'relative');
+        l2.css('top' , '');
+        //grandContainer.css('padding-top' , '0px');
   		}
 
   	})
@@ -427,6 +511,31 @@ App.controller('masterCtrl', function($scope) {
       num++;
 
     } , 2500)
+
+  });
+
+  $('.planner-text').click(function(){
+
+    $('#information-div').css({
+      'position' : 'absolute',
+      'left' : '-9999px'
+    })
+    $('#planner-div').css({
+      'position' : 'static',
+      'left' : '-0px'
+    })
+
+  });
+  $('.information-text').click(function(){
+
+    $('#planner-div').css({
+      'position' : 'absolute',
+      'left' : '-9999px'
+    })
+    $('#information-div').css({
+      'position' : 'static',
+      'left' : '-0px'
+    })
 
   });
 

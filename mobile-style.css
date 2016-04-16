@@ -1,7 +1,21 @@
 /* New Mobile Style */
 
 @media only screen and (max-width: 785px) {
-	
-	
-	
+
+	.banner-text {
+	  font-size: 40px;
+		padding-top: 150px;
+	}
+	#s-img {
+	  width: 50px;
+	  height: 50px;
+	}
+	#s-container {
+	  top: 65px;
+	}
+
+	#info-text, #pnr-text {
+		font-size: 18px;
+	}
+
 }
