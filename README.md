@@ -1,4 +1,5 @@
-# vacation-planner
+# Vacation Planner
+http://ryanwaite28.github.io/vacation-planner/
 Plan A Vacation!
 
 Select a vacation spot from the drop down and let the web app do the calculations. Just put in the info in the fields.
