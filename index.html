@@ -37,12 +37,20 @@
 				<input class="transition" id="your-place" type="text" placeholder="Input Your Location! City, State"/><br>
 				<input class="transition" id="submit-btn" type="button" value="Submit" ng-click="loadYourMarker()"/><br>
 				<p class="text-center" id="msg1"><strong>{{msgOne}}</strong></p>
+				<select class="middlr" id="crt-pls">
+					<option>-Select a Vacation Place-</option>
+					<option ng-repeat="vaca in currentVacaPlaces" id="{{key}}">
+						<p>{{vaca.place}}</p>
+					</option>
+				</select>
+				<p class="text-center"><strong>{{msgTwo}}</strong></p>
+				<br>
 
-				<div id="tdl" style="display: flex;">
-					<div class="planner-text transition">
+				<div id="tdl" style="">
+					<div class="planner-text transition l1">
 						<h3 id="pnr-text" class="text-center"><strong>Planner</strong></h3>
 					</div>
-					<div class="information-text transition">
+					<div class="information-text transition l2">
 						<h3 id="info-text" class="text-center"><strong>Information</strong></h3>
 					</div>
 				</div>
@@ -55,22 +63,16 @@
 
 				<div class="row">
 
-					<div class="col-md-4">
+					<div class="col-md-5">
 
 						<h1 class="text-center"><strong>Calculate<br>Cost</strong></h1>
-						<select class="middlr" id="crt-pls">
-							<option>-Select a Vacation Place-</option>
-							<option ng-repeat="vaca in currentVacaPlaces" id="{{key}}">
-								<p>{{vaca.place}}</p>
-							</option>
-						</select>
-						<p class="text-center"><strong>{{msgTwo}}</strong></p>
+
 						<hr>
 
-						<div class="col-sm-6">
+						<div class="col-md-6">
 							<p class="text-center"><strong>Your Money:</strong><br>{{yourMoney | currency}}</p>
 							<input id="remains-ipt" class="" type="" placeholder="Your Total Available">
-							<br><br>
+							<br><hr>
 
 							<p class="text-center"><strong>Round-Trip Plane Ticket:</strong><br>{{currentPlane | currency}} per person.</p>
 							<input id="apt-ipt" class="" type="" placeholder="Number of Tickets">
@@ -89,34 +91,34 @@
 							<br><br>
 						</div>
 
-						<div class="col-sm-6">
+						<div style="text-align: center;" class="col-md-6">
 
 							<p id="msg1">{{msg1}}</p><br>
 							<p id="msg2">{{msg2}}</p><br>
 							<p id="msg3">{{msg3}}</p><br>
 							<p id="msg4">{{msg4}}</p><br>
 							<p id="msg5">{{msg5}}</p><br>
-							<p id="msg6">{{msg6}}<br>{{remaining | currency}}</p>
+							<p id="msg6">{{msg6}} {{remaining | currency}}</p>
 
 						</div>
 
-						<div class="col-sm-12">
+						<div class="col-md-12">
 							<input id="ipt-1" class="middlr transition" type="button" value="Calculate Costs" ng-click="calculateCosts()"/>
 						</div>
 
 					</div>
 
-					<div class="col-md-8">
+					<div class="col-md-7">
 
 						<div>
 
-							<h1 class="text-center">Map</h1>
+							<h1 class="text-center"><strong>Map</strong></h1>
 							<div id="map-div">
 
 							</div>
 							<hr>
 
-							<h1 class="text-center">Image</h1>
+							<h1 class="text-center"><strong>Image</strong></h1>
 							<img class="middlr" id="vaca-img" alt="Vacation Image" src="{{currentImg}}"/>
 							<br>
 
@@ -132,7 +134,28 @@
 
 				<div class="row">
 
-					<div class="col-md-">
+					<div class="col-md-12">
+
+						<div class="middlr" style="width: 75%">
+							<br>
+							<img class="middlr" id="vaca-img" alt="Vacation Image" src="{{currentImg}}"/>
+							<br>
+							<input type="button" id="ipt-1" class="middlr transition" value="Load Information" ng-click="loadInfo()"/>
+							<hr>
+							<h1 class="text-center"><strong>{{currentVaca.place}}</strong></h1>
+							<br><br>
+							<ul id="news-items" class="article-list">
+								<li class="article" ng-repeat="article in articles">
+									<h2>{{article.headLineKicker}}</h2>
+									<a href={{article.webLink}}><h3>{{article.headLineMain}}</h3></a>
+									<p>{{article.leadParagraph}}</p>
+									<br>
+									<p>{{article.byLine}}</p>
+									<p>{{article.pubDate}}</p>
+									<hr>
+								</li>
+							</ul>
+						</div>
 
 					</div>
 
